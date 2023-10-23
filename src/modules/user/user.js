@@ -7,6 +7,9 @@ export const getuser=async(req,res,next)=>{
 export const profile=async(res,req,next)=>{
     try {
     const user=await usermodel.findById(req.user._id)
+    if (!user) {
+        return res.json({Message:"in-valid User"})
+    }
     return res.json({Message:"Done" , user})
     } catch (err) {
         console.log(`Error of Profile......${err}`);

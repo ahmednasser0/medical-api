@@ -17,7 +17,7 @@ export const auth=async(req,res,next)=>{
     }
 
     const decoded=DecodeToken({token , signature:process.env.TOKEN_SIGNATURE})
-    // console.log({decoded});
+    console.log({decoded});
     if (!decoded?.id || !decoded?.isloggedin) {
         return res.json({Message:"in-valid Decoder"})
     }
@@ -26,7 +26,7 @@ export const auth=async(req,res,next)=>{
     if (!authuser) {
         return res.json({Message:"in-valid User"})
     }
-    res.json({Message:"Done"})
+    res.json({Message:"Done",authuser})
     req.user=authuser
 
     return next()

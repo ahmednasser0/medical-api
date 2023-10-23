@@ -29,10 +29,6 @@ export const signup=async(req,res,next)=>{
 }
 
 export const login=AsyncHandler( async(req,res,next)=>{
-    const loginvalidation=Loginschema.validate(req.body , {abortEarly:false})
-    if (loginvalidation.error) {
-        return res.json({Message:"Validation Error" , loginvalidation})
-    }
         const  { email , password }=req.body
     const user = await usermodel.findOne({email})
     if (!user) {
