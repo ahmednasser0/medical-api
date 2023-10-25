@@ -8,13 +8,10 @@ import {
 	getReasonPhrase,
 	getStatusCode,
 } from 'http-status-codes';
-import {  Loginschema, SignUpschema } from "../../../MiddleWare/Validation.js";
+import { Loginschema } from "../../../MiddleWare/Validation.js";
 export const signup=async(req,res,next)=>{
     try {
-        const ValidationResult=SignUpschema.validate(req.body , {abortEarly:false})
-        if (ValidationResult.error) {
-            return res.json({Message:"Validation Error" , ValidationResult})
-        }
+        
         const {username , email , password , age , address , gender}=req.body
     const search = await usermodel.findOne({email})
     if (search) {
@@ -29,6 +26,7 @@ export const signup=async(req,res,next)=>{
 }
 
 export const login=AsyncHandler( async(req,res,next)=>{
+    
         const  { email , password }=req.body
     const user = await usermodel.findOne({email})
     if (!user) {
